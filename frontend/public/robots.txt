@@ -1,0 +1,5 @@
+# CSIR EOI 8119/06/01/2026 - Robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://csir-eoi.co.za/sitemap.xml

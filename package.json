@@ -1,0 +1,45 @@
+{
+  "name": "csir-eoi-8119-software-development",
+  "version": "1.0.0",
+  "description": "CSIR EOI 8119/06/01/2026 - Software Development Services Project demonstrating proficiency in modern web development, containerization, and full-stack development",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "cd frontend && npm test",
+    "test:backend": "cd backend && npm test",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:backend": "cd backend && npm run lint"
+  },
+  "keywords": [
+    "csir",
+    "software-development",
+    "nextjs",
+    "nodejs",
+    "express",
+    "mongodb",
+    "docker",
+    "typescript",
+    "react",
+    "full-stack"
+  ],
+  "author": "CSIR Software Development Services",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
