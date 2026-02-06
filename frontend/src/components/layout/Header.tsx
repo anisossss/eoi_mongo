@@ -1,22 +1,30 @@
-'use client';
+"use client";
 
 /**
- * CSIR EOI 8119/06/01/2026 - Header Component
+ * CSIR EOI 8119/06/02/2026 - Header Component
  * Main navigation header with responsive design
  */
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, ExternalLink } from 'lucide-react';
-import Link from 'next/link';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Menu,
+  X,
+  Github,
+  ExternalLink,
+  FileText,
+  Code2,
+  Home,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: '#data-section', label: 'Data' },
-    { href: '#', label: 'Documentation' },
-    { href: '#', label: 'API' },
+    { href: "/", label: "Dashboard", icon: Home },
+    { href: "/docs", label: "Documentation", icon: FileText },
+    { href: "/api-docs", label: "API Reference", icon: Code2 },
   ];
 
   return (
@@ -26,35 +34,39 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-secondary-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25">
-              <span className="text-white font-bold text-xl">C</span>
+              <span className="text-white font-bold text-xl">A</span>
             </div>
             <div className="hidden sm:block">
               <h1 className="text-lg font-bold text-slate-800 dark:text-white">
-                CSIR EOI
+                AINEXIM
               </h1>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                8119/06/01/2026
+                CSIR EOI 8119
               </p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+          <nav className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all"
+                >
+                  <Icon className="w-4 h-4" />
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href="https://hub.docker.com"
+              href="https://hub.docker.com/u/ainexim"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-ghost text-sm"
@@ -63,13 +75,13 @@ export default function Header() {
               Docker Hub
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/ainexim/csir-eoi-population"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary text-sm"
             >
               <Github className="w-4 h-4" />
-              Repository
+              GitHub
             </a>
           </div>
 
@@ -93,40 +105,44 @@ export default function Header() {
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
             className="md:hidden border-t border-slate-200/50 dark:border-slate-700/50"
           >
             <nav className="container mx-auto px-4 py-4 space-y-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                  >
+                    <Icon className="w-4 h-4" />
+                    {link.label}
+                  </Link>
+                );
+              })}
               <div className="pt-4 border-t border-slate-200 dark:border-slate-700 space-y-2">
                 <a
-                  href="https://hub.docker.com"
+                  href="https://hub.docker.com/u/ainexim"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
                   Docker Hub
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/ainexim/csir-eoi-population"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
                 >
                   <Github className="w-4 h-4" />
-                  Repository
+                  GitHub Repository
                 </a>
               </div>
             </nav>

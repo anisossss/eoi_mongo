@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
 /**
  * CSIR EOI 8119/06/01/2026 - Main Application Page
  * Single Page Web Application with DataUSA Population Data Visualization
- * 
+ *
  * This component fulfills the task requirements:
  * - Calls REST API endpoint (DataUSA API)
  * - Displays data in Grid View and Tree View
  * - Modern look and feel
  * - Interactive page elements (buttons)
  * - Built with Next.js (React framework)
- * 
+ *
  * Demonstrates proficiency in:
  * - React/Next.js
  * - TypeScript
@@ -19,62 +19,84 @@
  * - API integration
  */
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  LayoutGrid, 
-  GitBranch, 
-  RefreshCw, 
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  LayoutGrid,
+  GitBranch,
+  RefreshCw,
   TrendingUp,
   Database,
   Globe,
   Sparkles,
   ChevronRight,
   BarChart3,
-  Users
-} from 'lucide-react';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import GridView from '@/components/views/GridView';
-import TreeView from '@/components/views/TreeView';
-import ChartView from '@/components/views/ChartView';
-import StatsCard from '@/components/ui/StatsCard';
-import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import { usePopulationData } from '@/hooks/usePopulationData';
+  Users,
+} from "lucide-react";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import GridView from "@/components/views/GridView";
+import TreeView from "@/components/views/TreeView";
+import ChartView from "@/components/views/ChartView";
+import StatsCard from "@/components/ui/StatsCard";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import { usePopulationData } from "@/hooks/usePopulationData";
 
-type ViewMode = 'grid' | 'tree' | 'chart';
+type ViewMode = "grid" | "tree" | "chart";
 
 export default function HomePage() {
-  const [viewMode, setViewMode] = useState<ViewMode>('grid');
+  const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const { data, isLoading, error, refetch, isFetching } = usePopulationData();
 
   // Calculate statistics
   const stats = {
     totalRecords: data?.length || 0,
-    latestYear: data ? Math.max(...data.map(d => d.year)) : 0,
-    totalPopulation: data ? data.find(d => d.year === Math.max(...data.map(d => d.year)))?.population || 0 : 0,
-    growthRate: data && data.length >= 2 
-      ? (((data[0].population - data[1].population) / data[1].population) * 100).toFixed(2)
-      : '0',
+    latestYear: data ? Math.max(...data.map((d) => d.year)) : 0,
+    totalPopulation: data
+      ? data.find((d) => d.year === Math.max(...data.map((d) => d.year)))
+          ?.population || 0
+      : 0,
+    growthRate:
+      data && data.length >= 2
+        ? (
+            ((data[0].population - data[1].population) / data[1].population) *
+            100
+          ).toFixed(2)
+        : "0",
   };
 
   const viewOptions = [
-    { id: 'grid' as ViewMode, label: 'Grid View', icon: LayoutGrid, description: 'Tabular data display' },
-    { id: 'tree' as ViewMode, label: 'Tree View', icon: GitBranch, description: 'Hierarchical structure' },
-    { id: 'chart' as ViewMode, label: 'Chart View', icon: BarChart3, description: 'Visual analytics' },
+    {
+      id: "grid" as ViewMode,
+      label: "Grid View",
+      icon: LayoutGrid,
+      description: "Tabular data display",
+    },
+    {
+      id: "tree" as ViewMode,
+      label: "Tree View",
+      icon: GitBranch,
+      description: "Hierarchical structure",
+    },
+    {
+      id: "chart" as ViewMode,
+      label: "Chart View",
+      icon: BarChart3,
+      description: "Visual analytics",
+    },
   ];
 
   return (
     <>
       <Header />
-      
+
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 text-white py-20">
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
           <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-400/20 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-400/20 rounded-full blur-3xl"></div>
-          
+
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -84,17 +106,20 @@ export default function HomePage() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm mb-6">
                 <Sparkles className="w-4 h-4" />
-                <span>CSIR EOI 8119/06/01/2026 - Software Development Services</span>
+                <span>AINEXIM | CSIR EOI 8119/06/02/2026</span>
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Population Data
-                <span className="block text-secondary-300">Visualization Platform</span>
+                <span className="block text-secondary-300">
+                  Visualization Platform
+                </span>
               </h1>
-              
+
               <p className="text-lg md:text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-                A modern web application demonstrating proficiency in full-stack development,
-                featuring real-time data from the DataUSA API with multiple visualization options.
+                A modern web application demonstrating proficiency in full-stack
+                development, featuring real-time data from the DataUSA API with
+                multiple visualization options.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">
@@ -112,8 +137,8 @@ export default function HomePage() {
                   )}
                   Fetch Data
                 </motion.button>
-                
-                <a 
+
+                <a
                   href="#data-section"
                   className="btn border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm"
                 >
@@ -126,9 +151,15 @@ export default function HomePage() {
 
           {/* Decorative wave */}
           <div className="absolute bottom-0 left-0 right-0">
-            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" 
-                    className="fill-slate-50 dark:fill-slate-900"/>
+            <svg
+              viewBox="0 0 1440 120"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+                className="fill-slate-50 dark:fill-slate-900"
+              />
             </svg>
           </div>
         </section>
@@ -189,7 +220,7 @@ export default function HomePage() {
                     Interactive data visualization with multiple view options
                   </p>
                 </div>
-                
+
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -211,7 +242,7 @@ export default function HomePage() {
                 {viewOptions.map((option) => {
                   const Icon = option.icon;
                   const isActive = viewMode === option.id;
-                  
+
                   return (
                     <motion.button
                       key={option.id}
@@ -220,9 +251,10 @@ export default function HomePage() {
                       onClick={() => setViewMode(option.id)}
                       className={`
                         flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all duration-300
-                        ${isActive 
-                          ? 'bg-white dark:bg-slate-700 text-primary-600 dark:text-primary-400 shadow-lg' 
-                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                        ${
+                          isActive
+                            ? "bg-white dark:bg-slate-700 text-primary-600 dark:text-primary-400 shadow-lg"
+                            : "text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
                         }
                       `}
                     >
@@ -242,7 +274,10 @@ export default function HomePage() {
             >
               {isLoading ? (
                 <div className="flex items-center justify-center h-96">
-                  <LoadingSpinner size="lg" message="Fetching population data from DataUSA API..." />
+                  <LoadingSpinner
+                    size="lg"
+                    message="Fetching population data from DataUSA API..."
+                  />
                 </div>
               ) : error ? (
                 <div className="flex flex-col items-center justify-center h-96 text-center">
@@ -253,7 +288,9 @@ export default function HomePage() {
                     Failed to Load Data
                   </h3>
                   <p className="text-slate-600 dark:text-slate-400 mb-4 max-w-md">
-                    {error instanceof Error ? error.message : 'An error occurred while fetching data.'}
+                    {error instanceof Error
+                      ? error.message
+                      : "An error occurred while fetching data."}
                   </p>
                   <button onClick={() => refetch()} className="btn-primary">
                     <RefreshCw className="w-4 h-4" />
@@ -269,9 +306,9 @@ export default function HomePage() {
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
                   >
-                    {viewMode === 'grid' && <GridView data={data} />}
-                    {viewMode === 'tree' && <TreeView data={data} />}
-                    {viewMode === 'chart' && <ChartView data={data} />}
+                    {viewMode === "grid" && <GridView data={data} />}
+                    {viewMode === "tree" && <TreeView data={data} />}
+                    {viewMode === "chart" && <ChartView data={data} />}
                   </motion.div>
                 </AnimatePresence>
               ) : (
@@ -283,7 +320,8 @@ export default function HomePage() {
                     No Data Available
                   </h3>
                   <p className="text-slate-600 dark:text-slate-400 mb-4">
-                    Click the button below to fetch population data from the DataUSA API.
+                    Click the button below to fetch population data from the
+                    DataUSA API.
                   </p>
                   <button onClick={() => refetch()} className="btn-primary">
                     <RefreshCw className="w-4 h-4" />
@@ -308,42 +346,49 @@ export default function HomePage() {
                 Technical Capabilities
               </h2>
               <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                This application demonstrates proficiency in modern web development technologies
-                as required by CSIR EOI 8119/06/01/2026.
+                This application demonstrates proficiency in modern web
+                development technologies as required by CSIR EOI
+                8119/06/02/2026.
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 {
-                  title: 'Next.js & React',
-                  description: 'Modern frontend framework with TypeScript, server-side rendering, and optimized performance.',
-                  icon: '⚛️',
+                  title: "Next.js & React",
+                  description:
+                    "Modern frontend framework with TypeScript, server-side rendering, and optimized performance.",
+                  icon: "⚛️",
                 },
                 {
-                  title: 'Node.js & Express',
-                  description: 'Scalable backend API with RESTful endpoints, JWT authentication, and MongoDB integration.',
-                  icon: '🚀',
+                  title: "Node.js & Express",
+                  description:
+                    "Scalable backend API with RESTful endpoints, JWT authentication, and MongoDB integration.",
+                  icon: "🚀",
                 },
                 {
-                  title: 'Docker Containerization',
-                  description: 'Fully containerized application stack for consistent deployment across environments.',
-                  icon: '🐳',
+                  title: "Docker Containerization",
+                  description:
+                    "Fully containerized application stack for consistent deployment across environments.",
+                  icon: "🐳",
                 },
                 {
-                  title: 'MongoDB Database',
-                  description: 'NoSQL database with optimized schemas, indexing, and data validation.',
-                  icon: '🗃️',
+                  title: "MongoDB Database",
+                  description:
+                    "NoSQL database with optimized schemas, indexing, and data validation.",
+                  icon: "🗃️",
                 },
                 {
-                  title: 'REST API Integration',
-                  description: 'External API consumption from DataUSA with error handling and data transformation.',
-                  icon: '🔗',
+                  title: "REST API Integration",
+                  description:
+                    "External API consumption from DataUSA with error handling and data transformation.",
+                  icon: "🔗",
                 },
                 {
-                  title: 'Modern UI/UX',
-                  description: 'Responsive design with Tailwind CSS, animations, and accessibility features.',
-                  icon: '🎨',
+                  title: "Modern UI/UX",
+                  description:
+                    "Responsive design with Tailwind CSS, animations, and accessibility features.",
+                  icon: "🎨",
                 },
               ].map((feature, index) => (
                 <motion.div
