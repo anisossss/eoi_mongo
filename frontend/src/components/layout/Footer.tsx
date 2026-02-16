@@ -58,7 +58,7 @@ export default function Footer() {
                 <ExternalLink className="w-5 h-5" />
               </a>
               <a
-                href="mailto:info@ainexim.co.za"
+                href="mailto:contact@ainexim.co.za"
                 className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
                 aria-label="Email"
               >

@@ -36,8 +36,8 @@ interface JwtPayload {
  * Generate JWT token
  */
 export const generateToken = (user: IUser): string => {
-  const secret = process.env.JWT_SECRET || 'default-secret-key';
-  const expiresIn = process.env.JWT_EXPIRES_IN || '7d';
+  const secret: string = process.env.JWT_SECRET || 'default-secret-key';
+  const options: jwt.SignOptions = { expiresIn: '7d' };
 
   return jwt.sign(
     {
@@ -46,7 +46,7 @@ export const generateToken = (user: IUser): string => {
       role: user.role,
     },
     secret,
-    { expiresIn }
+    options
   );
 };
 

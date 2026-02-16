@@ -49,7 +49,7 @@ const handleCastErrorDB = (err: ApiError): AppError => {
 /**
  * Handle MongoDB Duplicate Key Error
  */
-const handleDuplicateFieldsDB = (err: ApiError): AppError => {
+const handleDuplicateFieldsDB = (_err: ApiError): AppError => {
   const message = 'Duplicate field value entered. Please use another value.';
   return new AppError(message, 400);
 };

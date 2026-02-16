@@ -368,15 +368,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 📞 Contact
-
-For inquiries regarding this EOI submission:
-
-- **Email**: tender@csir.co.za
-- **EOI Reference**: 8119/06/01/2026
-
----
-
 <div align="center">
 
 **Built with ❤️ for CSIR EOI 8119/06/01/2026**
