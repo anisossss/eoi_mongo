@@ -27,7 +27,7 @@ COPY . .
 # Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_API_URL=http://localhost:5000/api
+ENV NEXT_PUBLIC_API_URL=https://population.ainexim-eoi.co.za/api
 ENV NEXT_PUBLIC_DATAUSA_API=https://datausa.io/api/data
 
 # Build the application
