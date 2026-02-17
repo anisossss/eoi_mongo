@@ -123,7 +123,7 @@ docker-compose up -d
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/your-org/csir-eoi-8119.git
+git clone https://github.com/anisossss/eoi_mongo.git
 cd csir-eoi-8119
 ```
 

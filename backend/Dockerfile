@@ -47,9 +47,6 @@ RUN npm install --omit=dev && npm cache clean --force
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
 
-# Copy any additional required files
-COPY --from=builder /app/src/scripts ./scripts
-
 # Change ownership to non-root user
 RUN chown -R nodejs:nodejs /app
 

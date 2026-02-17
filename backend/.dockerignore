@@ -12,7 +12,6 @@ coverage
 .eslintrc*
 .prettierrc*
 jest.config.*
-tsconfig.json
 *.test.ts
 *.spec.ts
 __tests__
